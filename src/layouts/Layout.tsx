@@ -1,44 +1,60 @@
 import {Link, Outlet} from 'react-router-dom'
+import DumbwaysImg from '../assets/Dumbways.png'
+import { Box, Grid, Stack, Button, Typography } from '@mui/material'
+import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
+import Person4OutlinedIcon from '@mui/icons-material/Person4Outlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import ChecklistOutlinedIcon from '@mui/icons-material/ChecklistOutlined';
 
 function Layout() {
   return (
-    <div className='container-fluid'>
-      <div className="row d-flex" style={{height: '100vh'}}>
+    <Grid container>
+      <Grid item xs={2} sx={{height: "100vh", bgcolor: "secondary.dark", borderRight: "1px solid white"}}>
+          <Stack direction="column" spacing={2} sx={{height: "100vh", p:2}}>
+            <img height='100px' width='100px' className='rounded-circle border' src={DumbwaysImg} alt="" />
+            <Stack gap={1} direction="row" alignItems="center">
+              <HouseOutlinedIcon sx={{color: "white"}}/>
+              <Link to='home' style={{color: 'white', textDecoration: 'none', fontSize: '20px'}}>Home</Link>
+            </Stack>
 
-        <div className='col-md-2 bg-dark'>
-          <nav className="nav flex-column p-1">
-            <img height='100px' width='100px' className='rounded-circle border' src="https://avatars3.githubusercontent.com/u/34464790?s=220&v=4" alt="" />
-            <Link to='home' className="nav-link text-light"><i className="bi bi-house text-light"></i> Home</Link>
-            <Link to='about' className="nav-link text-light"><i className="bi bi-person text-light"></i> About</Link>
-            <Link to='follows' className='nav-link text-light'><i className="bi bi-heart text-light"></i> Follows</Link>
-            <Link to='follows' className='nav-link text-light'><i className="bi bi-person-circle text-light"></i> Profile</Link>
-            <Link to='todo' className='nav-link text-light'><i className="bi bi-list-check text-light"></i> Todo list</Link>
-            <button className='btn btn-outline-warning rounded'>make new post</button>
-          </nav>
-        </div>
+            <Stack gap={1} direction="row" alignItems="center">
+              <Person4OutlinedIcon sx={{color: "white"}}/>
+              <Link to='about' style={{color: 'white', textDecoration: 'none', fontSize: '20px'}}>About</Link>
+            </Stack>
 
-        <div className='col-md-7 bg-dark border-end border-start text-light p-3'>
-          <Outlet/>
-        </div>
+            <Stack gap={1} direction="row" alignItems="center">
+              <FavoriteBorderOutlinedIcon sx={{color: "white"}}/>
+              <Link to='/' style={{color: 'white', textDecoration: 'none', fontSize: '20px'}}>Followers</Link>
+            </Stack>
 
-        <div className='col-md-3 bg-dark'>
-          <div className='d-flex flex-column h-100'>
-            <div className='my-3 h-25 rounded' style={{backgroundColor:'RGB(59, 59, 59)'}}>
-              <div className='bg-warning h-50 rounded w-100'></div>
-              <div className='d-flex'>
-                <img className='rounded-circle border position-relative' height='80px' width='80px' src="https://i.pinimg.com/originals/a9/99/ee/a999ee87f1cc57beb5cc1c60fc96cded.jpg" style={{top:"-40px"}} alt="" />
-                <p className='text-light mx-2 fs-5'>Itadori Yuji</p>
+            <Stack gap={1} direction="row" alignItems="center">
+              <ChecklistOutlinedIcon sx={{color: "white"}}/>
+              <Link to='todo' style={{color: 'white', textDecoration: 'none', fontSize: '20px'}}>Todo List</Link>
+            </Stack>
+        
+            <Button variant="contained" sx={{bgcolor: "primary.main", borderRadius: "20px", width:"100%"}}>make new post</Button>
+          </Stack>
+      </Grid>
 
-                <button className='btn btn-outline-warning rounded ms-auto h-25 mt-1'>follow</button>
-              </div>
-            </div>
+      <Grid item xs={7} sx={{height: "100vh", bgcolor: "secondary.dark", color: "white", p:3, overflowY: "scroll"}}>
+        <Outlet/>
+      </Grid>
 
-            <div className='h-50' style={{backgroundColor:'RGB(59, 59, 59)', borderRadius: '20px'}}>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <Grid item xs={3} sx={{height: "100vh", bgcolor: "secondary.dark", borderLeft: "1px solid white"}}>
+        <Stack direction="column" spacing={2} sx={{height: "100vh", p:2}}>
+          <Box sx={{height: "25vh", bgcolor: "secondary.main", borderRadius: "20px"}}>
+            <Box sx={{backgroundImage: "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXmX8Ywh4t3AA6OvDYaz7gXIrnWCNv1urplg&s)", height: "45%", backgroundRepeat: "repeat-y", backgroundSize: "cover", borderRadius: "20px 20px 0 0"}}></Box>
+            <Box display="flex">
+            <img height='80px' width='80px' src="https://i.pinimg.com/originals/a9/99/ee/a999ee87f1cc57beb5cc1c60fc96cded.jpg" style={{top:"-40px", position: "relative", borderRadius: "50%", margin: "5px"}} alt="" />
+            <Typography variant='subtitle1' sx={{color: "white"}}>Itadori Yuji</Typography>
+            <Button variant="contained" sx={{bgcolor: "secondary.light", ml: "auto", borderRadius: "10px", height: "8%", p:"3px" ,marginTop: "5px", fontSize: "10px"}}>follow</Button>
+            </Box>
+          </Box>
+          <Box sx={{height: "70vh", bgcolor: "secondary.main", borderRadius: "20px"}}></Box>
+
+        </Stack>
+      </Grid>
+    </Grid>
   )
 }
 
