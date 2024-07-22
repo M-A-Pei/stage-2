@@ -1,6 +1,6 @@
 import {createTheme} from '@mui/material/styles'
 
-const theme:object = createTheme({
+const theme = createTheme({
     palette: {
       primary: {
         light: '#fcb45b',
