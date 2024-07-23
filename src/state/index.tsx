@@ -14,7 +14,7 @@ export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
       username: "",
    });
 
-   const [isLogin, setIsLogin] = useState(false);
+   const [isLogin, setIsLogin] = useState(true);
 
    const setUser = (user: IUser) => {
       setUserState(user);
