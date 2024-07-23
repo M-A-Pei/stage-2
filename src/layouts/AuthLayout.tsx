@@ -1,7 +1,14 @@
 import { Box } from '@mui/material'
-import { Outlet } from 'react-router-dom'
+import useStore from '../state/hooks'
+import { Navigate, Outlet } from 'react-router-dom'
 
 function AuthLayout() {
+  const {isLogin} = useStore()
+
+  if(isLogin){
+    return <Navigate to="/"/>
+  }
+
   return (
       <Box
       sx={{
