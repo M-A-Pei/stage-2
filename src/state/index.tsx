@@ -10,11 +10,10 @@ export const Store = createContext<TStore | null>(null);
 export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
    const [user, setUserState] = useState<IUser>({
       email: "",
-      fullName: "",
       username: "",
    });
 
-   const [isLogin, setIsLogin] = useState(true);
+   const [isLogin, setIsLogin] = useState(false);
 
    const setUser = (user: IUser) => {
       setUserState(user);
@@ -24,7 +23,6 @@ export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
    const clearUser = () => {
       setUserState({
          email: "",
-         fullName: "",
          username: "",
       });
 

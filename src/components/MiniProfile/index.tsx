@@ -11,10 +11,10 @@ export default function MiniProfile({pfp, username, tag}: IMiniProfile) {
     <Stack direction="row" gap={1}>
         <img src={pfp} width="60px" style={{borderRadius: "50%"}} alt="" />
         <Stack direction="column">
-            <h4>{username}</h4>
-            <small>{tag}</small>
+            <h3>{username}</h3>
+            <small style={{color: "gray"}}>{tag}</small>
         </Stack>
-        <Button variant='contained' sx={{bgcolor: "secondary.light", borderRadius: "20px", color: "white", fontSize:"8px", ml:"auto", p:"3px", height: "50%", alignSelf: "center"}}>follow</Button>
+        <Button variant='contained' sx={{bgcolor: "secondary.light", borderRadius: "20px", color: "white", fontSize:"10px", ml:"auto", p:"6px", height: "50%", alignSelf: "center"}}>follow</Button>
     </Stack>
   )
 }

@@ -12,7 +12,6 @@ export interface IStoreStates {
     profile?: IProfile;
     username: string;
     email: string;
-    fullName: string;
  }
  
  export interface IProfile {

@@ -7,6 +7,7 @@ import TodoList from "../pages/TodoList";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Detail from "../pages/Detail";
 
 let route: RouteObject[] = [
     {
@@ -20,12 +21,6 @@ let route: RouteObject[] = [
             {
                 path: 'home',
                 element: <Home/>,
-                children:[
-                    {
-                        path: 'ppp',
-                        element: <p>hi hello there</p>
-                    }
-                ]
             },
             {
                 path: 'about',
@@ -34,6 +29,10 @@ let route: RouteObject[] = [
             {
                 path: 'todo',
                 element: <TodoList/>
+            },
+            {
+                path: "detail/:id",
+                element: <Detail/>
             }
         ]
     },

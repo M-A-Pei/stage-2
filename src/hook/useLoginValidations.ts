@@ -1,14 +1,12 @@
-import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { IRegisterForm } from '../types/register'
+import { ILoginForm } from '../types/login'
 
-export default function useRegisterValidation() {
+export default function useLoginValidation() {
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:466175313.
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:3710289969.
     const schema = yup.object().shape({
-        username: yup
-           .string()
-           .min(3, "Username must be at least 3 characters")
-           .required("Username is required"),
         email: yup
            .string()
            .required("Email is required")
@@ -16,19 +14,17 @@ export default function useRegisterValidation() {
         password: yup
            .string()
            .required("Password is required")
-           .min(6, "Password must be at least 6 characters"),
-     });
+    })
 
-     return(
-        useForm<IRegisterForm>({
+    return(
+        useForm<ILoginForm>({
            resolver: yupResolver(schema),
            defaultValues: {
-              username: "",
               email: "",
               password: "",
            },
            reValidateMode: "onSubmit",
            mode: "all"
         })
-     )
+    )
 }
