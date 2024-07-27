@@ -9,6 +9,8 @@ import Register from "../pages/Register";
 import Detail from "../pages/Detail";
 import Error from "../pages/Error"
 import Profile from "../pages/Profile"
+import AllPost from "../pages/Profile/AllPost"
+import Media from "../pages/Profile/Media"
 
 let route: RouteObject[] = [
     {
@@ -33,7 +35,17 @@ let route: RouteObject[] = [
             },
             {
                 path: "profile/:userID?",
-                element: <Profile/>
+                element: <Profile/>,
+                children: [
+                    {
+                        index: true,
+                        element: <AllPost/>
+                    },
+                    {
+                        path: 'media',
+                        element: <Media/>
+                    }
+                ]
             }
         ],
         errorElement: <Error/>
@@ -54,4 +66,4 @@ let route: RouteObject[] = [
     }
 ]
 
-export {route}
+export default route

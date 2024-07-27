@@ -14,7 +14,7 @@ export default function ProfileBar({username,pfp,banner,bio}:IProfile) {
             <Box sx={{backgroundImage: "url(" + banner + ")", height: "30%", backgroundRepeat: "repeat-y", backgroundSize: "cover", borderRadius: "20px 20px 0 0"}}></Box>
             <Box display="flex" sx={{height: "20%"}}>
               <img height='80px' width='80px' src={pfp} style={{top:"-40px", position: "relative", borderRadius: "50%", margin: "5px"}} alt="" />
-              <Button variant="contained" sx={{bgcolor: "secondary.light", ml: "auto", borderRadius: "10px", height: "50%", p:"6px" ,marginTop: "5px", fontSize: "10px"}}>follow</Button>
+              <Button variant="contained" sx={{bgcolor: "secondary.light", ml: "auto", borderRadius: "10px", height: "75%", p:"6px" ,marginTop: "5px", fontSize: "12px"}}>follow</Button>
             </Box>
             <Box display="flex" flexDirection="column" sx={{marginLeft: "10px", color: "white"}}>
               <Typography variant='h5'>{username}</Typography>

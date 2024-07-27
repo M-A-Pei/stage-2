@@ -8,7 +8,6 @@ import ProfileBar from '../components/ProfileBar'
 function Layout() {
   const {isLogin, user} = useStore()
   const location = useLocation().pathname
-  console.log(location != "/profile")
 
   if(!isLogin){
     return <Navigate to="/auth/login"/>
@@ -25,7 +24,7 @@ function Layout() {
       <Grid item xs={4} sx={{height: "100vh", bgcolor: "secondary.dark", borderLeft: "1px solid white"}}>
         <Stack direction="column" spacing={2} sx={{height: "100vh", p:2}}>
 
-          {location != "/profile" &&
+          {!(location == "/profile/media" || location == "/profile") &&
             <ProfileBar username={user.username} bio={user.profile.bio} pfp={user.profile.avatar} banner={user.profile.banner}/>
           }
           
