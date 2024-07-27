@@ -26,7 +26,7 @@ export default function Profile(){
             <ProfileBar username={data.username} pfp={data.pfp} banner={data.banner} bio={data.bio}/>
 
             <Box display="flex" sx={{flexDirection:"column" ,bgcolor: "secondary.dark", height:"56vh", marginTop: "5px", borderRadius: "20px"}}>
-                <Stack flexDirection="row" sx={{borderBottom: "1px solid white"}}>
+                <Stack flexDirection="row" sx={{borderBottom: "1px solid gray", marginBottom: "10px"}}>
                     <Link to={"/profile" + (userID === undefined ? "" : "/" + userID)} style={{width: "50%"}}><Button sx={{width: "100%", color: "white"}} variant="text">all post</Button></Link>
                     <Link to="media" style={{width: "50%"}}><Button sx={{width: "100%", color: "white"}} variant="text">media</Button></Link>
                 </Stack>

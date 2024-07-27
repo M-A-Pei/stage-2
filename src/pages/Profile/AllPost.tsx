@@ -1,3 +1,12 @@
+import Post from "../../components/Post"
+import posts from '../../DummyData/posts'
+
 export default function AllPost(){
-    return <h1>all post</h1>
+    return (
+        <>
+        {posts.map((e, i) => (
+            <Post i={i} name={e.name} text={e.text}/>
+          ))}
+        </>
+    )
 }

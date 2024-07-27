@@ -3,3 +3,18 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background:rgb(100, 100, 100)
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #dd8f29; 
+  }
+  
