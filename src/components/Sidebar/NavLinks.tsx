@@ -2,13 +2,14 @@ import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
 import Person4OutlinedIcon from '@mui/icons-material/Person4Outlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ChecklistOutlinedIcon from '@mui/icons-material/ChecklistOutlined';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import { NavLink} from "react-router-dom";
 import { Stack, Typography } from '@mui/material';
 
 export default function NavLinks() {
     return (
     <>
-        <NavLink to ='/home' style={{textDecoration: 'none'}}>
+        <NavLink to ='/' style={{textDecoration: 'none'}}>
         {({isActive}) => 
             <Stack gap={1} direction="row" alignItems="center" sx={{color: isActive ? "primary.light" : "white"}}>
                 <HouseOutlinedIcon/>
@@ -17,11 +18,11 @@ export default function NavLinks() {
         }
         </NavLink>
 
-        <NavLink to ='/about' style={{textDecoration: 'none'}}>
+        <NavLink to ='/search' style={{textDecoration: 'none'}}>
             {({isActive}) => 
                 <Stack gap={1} direction="row" alignItems="center" sx={{color: isActive ? "primary.light" : "white"}}>
-                    <Person4OutlinedIcon/>
-                    <Typography variant="subtitle1">about</Typography>
+                    <ManageSearchIcon/>
+                    <Typography variant="subtitle1">search</Typography>
                 </Stack>
             }
         </NavLink>
@@ -40,6 +41,15 @@ export default function NavLinks() {
                 <Stack gap={1} direction="row" alignItems="center" sx={{color: isActive ? "primary.light" : "white"}}>
                     <ChecklistOutlinedIcon/>
                     <Typography variant="subtitle1">Todo List</Typography>
+                </Stack>
+            }
+        </NavLink>
+
+        <NavLink to ='/profile' style={{textDecoration: 'none'}}>
+            {({isActive}) => 
+                <Stack gap={1} direction="row" alignItems="center" sx={{color: isActive ? "primary.light" : "white"}}>
+                    <Person4OutlinedIcon/>
+                    <Typography variant="subtitle1">Profile</Typography>
                 </Stack>
             }
         </NavLink>

@@ -15,7 +15,12 @@ function Login() {
     const dummyName = data.email.split("@")[0]
     setUser({
       username: dummyName,
-      email: data.email
+      email: data.email,
+      profile: {
+        avatar: "https://i.pinimg.com/originals/a9/99/ee/a999ee87f1cc57beb5cc1c60fc96cded.jpg",
+        banner: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXmX8Ywh4t3AA6OvDYaz7gXIrnWCNv1urplg&s",
+        bio: "im the default user!"
+      }
     })
     reset()
   }

@@ -3,12 +3,16 @@ import {Link} from "react-router-dom"
 import DumbwaysImg from "../assets/Dumbways.png"
 import useRegisterValidation from "../hook/useRegisterValidation"
 import { Controller } from "react-hook-form";
+import axios from "axios";
+import { IRegisterForm } from "../types/register";
 
 
 export default function Register() {
   const {control, handleSubmit, reset} = useRegisterValidation()
 
-  function onSubmit(){
+  function onSubmit(e: IRegisterForm){
+      axios.post("https://3000-idx-stage2backend-1721921630047.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev//account", e).then(response => console.log(response))
+    
     reset()
   }
 

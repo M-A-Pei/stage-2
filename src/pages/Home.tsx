@@ -2,35 +2,9 @@ import { Stack, TextField, Button} from "@mui/material"
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CommentIcon from '@mui/icons-material/Comment';
 import { Link } from "react-router-dom";
+import posts from '../DummyData/posts'
 
 function Home() {
-  const dummyData = [
-    {
-      name: "user1",
-      tag: "@user1",
-      text: " is simply dummy text of then the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-    },
-    {
-      name: "user2",
-      tag: "@user3",
-      text: " is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-    },    
-    {
-      name: "user3",
-      tag: "@user3",
-      text: " is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-    },   
-    {
-      name: "user4",
-      tag: "@user4",
-      text: "survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-    },    
-    {
-      name: "user5",
-      tag: "@user5",
-      text: " iing industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-    },
-  ]
 
   return (
     <Stack spacing={3} direction="column">
@@ -50,7 +24,7 @@ function Home() {
             <Button variant="contained" sx={{bgcolor: "primary.dark", borderRadius: "20px", height:"50%"}}>Post</Button>
         </Stack>
         
-        {dummyData.map((e, i) => (
+        {posts.map((e, i) => (
           <Link to={`/detail/${i}`} key={i} style={{textDecoration: "none", color: "white"}}>
             <Stack direction="row" gap={1}>
               <img src="https://i.pinimg.com/736x/a6/67/73/a667732975f0f1da1a0fd4625e30d776.jpg" width="45px" height="45px" style={{borderRadius: "50%"}} alt="" />
