@@ -11,6 +11,11 @@ export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
    const [user, setUserState] = useState<IUser>({
       email: "",
       username: "",
+      profile: {
+         avatar: "",
+         banner: "",
+         bio: ""
+      }
    });
 
    const [isLogin, setIsLogin] = useState(false);
@@ -24,6 +29,11 @@ export const StoreProvider: React.FC<StoreProps> = ({ children }) => {
       setUserState({
          email: "",
          username: "",
+         profile: {
+            avatar: "",
+            banner: "",
+            bio: ""
+         }
       });
 
       setIsLogin(false);

@@ -11,7 +11,7 @@ export default function Search() {
             }}} size="small"/>
       
       {profile.map((e, i) => (
-        <Link to={"/profile/" + i} key={i} style={{textDecoration: "none", color: "white"}}>
+        <Link to={"/profile/" + i + "/allpost"} key={i} style={{textDecoration: "none", color: "white"}}>
           <MiniProfile username={e.username} pfp={e.pfp}/>
         </Link>
       ))}

@@ -38,7 +38,7 @@ let route: RouteObject[] = [
                 element: <Profile/>,
                 children: [
                     {
-                        index: true,
+                        path: 'allpost',
                         element: <AllPost/>
                     },
                     {

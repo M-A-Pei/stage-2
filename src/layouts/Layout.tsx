@@ -1,6 +1,8 @@
 import {Outlet, Navigate, useLocation} from 'react-router-dom'
 import { Box, Grid, Stack, Typography } from '@mui/material'
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import YouTubeIcon from '@mui/icons-material/YouTube'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import InstagramIcon from '@mui/icons-material/Instagram'
 import Sidebar from '../components/Sidebar'
 import useStore from '../state/hooks'
 import MiniProfile from '../components/MiniProfile'
@@ -25,7 +27,7 @@ function Layout() {
       <Grid item xs={4} sx={{height: "100vh", bgcolor: "secondary.dark", borderLeft: "1px solid white"}}>
         <Stack direction="column" spacing={2} sx={{height: "100vh", p:2}}>
 
-          {!(location == "/profile/media" || location == "/profile") &&
+          {!(location == "/profile/media" || location == "/profile" || location == "/profile/allpost") &&
             <ProfileBar username={user.username} bio={user.profile.bio} pfp={user.profile.avatar} banner={user.profile.banner}/>
           }
           
@@ -40,10 +42,14 @@ function Layout() {
             </Stack>
           </Box>
 
-          <Box sx={{height: "8vh", bgcolor: "secondary.main", borderRadius: "20px", color: "white", p:2}}>
+          <Box sx={{height: "auto", bgcolor: "secondary.main", borderRadius: "20px", color: "white", p:2}}>
             <Stack flexDirection="row" gap={1}>
-              <p>developed by Syafii &#x2022;</p> <YouTubeIcon fontSize='small'/>
+              <p>developed by Syafii &#x2022;</p>
+              <YouTubeIcon fontSize='small'/>
+              <TwitterIcon fontSize='small'/>
+              <InstagramIcon fontSize='small'/>
             </Stack>
+            <small style={{color: "gray"}}>powered by Dumbways &#x2022; #1 coding bootcamp</small>
             
           </Box>
 

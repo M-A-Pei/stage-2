@@ -45,7 +45,7 @@ export default function NavLinks() {
             }
         </NavLink>
 
-        <NavLink to ='/profile' style={{textDecoration: 'none'}}>
+        <NavLink to ='/profile/allpost' style={{textDecoration: 'none'}}>
             {({isActive}) => 
                 <Stack gap={1} direction="row" alignItems="center" sx={{color: isActive ? "primary.light" : "white"}}>
                     <Person4OutlinedIcon/>
