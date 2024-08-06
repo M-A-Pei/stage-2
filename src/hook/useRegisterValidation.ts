@@ -5,18 +5,21 @@ import { IRegisterForm } from '../types/register'
 
 export default function useRegisterValidation() {
     const schema = yup.object().shape({
-        username: yup
+         username: yup
            .string()
            .min(3, "Username must be at least 3 characters")
            .required("Username is required"),
-        email: yup
+         email: yup
            .string()
            .required("Email is required")
            .email("Email is invalid"),
-        password: yup
+         password: yup
            .string()
            .required("Password is required")
            .min(6, "Password must be at least 6 characters"),
+         description: yup
+           .string()
+           .required("description is required")
      });
 
      return(
@@ -26,6 +29,7 @@ export default function useRegisterValidation() {
               username: "",
               email: "",
               password: "",
+              description: ""
            },
            reValidateMode: "onSubmit",
            mode: "all"

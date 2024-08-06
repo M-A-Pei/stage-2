@@ -3,17 +3,21 @@ import {Link} from "react-router-dom"
 import DumbwaysImg from "../assets/Dumbways.png"
 import useRegisterValidation from "../hook/useRegisterValidation"
 import { Controller } from "react-hook-form";
-import axios from "axios";
 import { IRegisterForm } from "../types/register";
+import { api } from "../api";
 
 
 export default function Register() {
   const {control, handleSubmit, reset} = useRegisterValidation()
 
-  function onSubmit(e: IRegisterForm){
-      axios.post("https://3000-idx-stage2backend-1721921630047.cluster-7ubberrabzh4qqy2g4z7wgxuw2.cloudworkstations.dev//account", e).then(response => console.log(response))
-    
-    reset()
+  async function onSubmit(e: IRegisterForm){
+    try{
+      const results = await api.post('/auth/register', e)
+      console.log(results)
+      reset()
+    }catch(error){
+      console.log(error)
+    }
   }
 
   const onError = (errors: any) => {
@@ -35,7 +39,22 @@ export default function Register() {
           control={control}
           render={({field, fieldState}) => (
             <FormControl error={Boolean(fieldState.error)} sx={{width: "100%"}}>
-              <TextField {...field} label="Username" variant="filled" sx={{bgcolor: "white", borderRadius: "10px"}} />
+              <TextField {...field} label="what should we call you?" variant="filled" sx={{bgcolor: "white", borderRadius: "10px"}} />
+              {Boolean(fieldState.error) && (
+                     <FormHelperText>
+                        {fieldState.error?.message}
+                     </FormHelperText>
+                  )}
+            </FormControl>
+          )}
+        />
+
+        <Controller
+          name="description"
+          control={control}
+          render={({field, fieldState}) => (
+            <FormControl error={Boolean(fieldState.error)} sx={{width: "100%"}}>
+              <TextField {...field} label="tell us about yourself" variant="filled" sx={{bgcolor: "white", borderRadius: "10px"}} />
               {Boolean(fieldState.error) && (
                      <FormHelperText>
                         {fieldState.error?.message}
@@ -50,7 +69,7 @@ export default function Register() {
           control={control}
           render={({field, fieldState}) => (
             <FormControl error={Boolean(fieldState.error)} sx={{width: "100%"}}>
-              <TextField {...field} label="Email" variant="filled" sx={{bgcolor: "white", borderRadius: "10px"}} />
+              <TextField {...field} label="what's your email?" variant="filled" sx={{bgcolor: "white", borderRadius: "10px"}} />
               {Boolean(fieldState.error) && (
                      <FormHelperText>
                         {fieldState.error?.message}
@@ -65,7 +84,7 @@ export default function Register() {
           control={control}
           render={({field, fieldState}) => (
             <FormControl error={Boolean(fieldState.error)} sx={{width: "100%"}}>
-              <TextField {...field} label="password" variant="filled" sx={{bgcolor: "white", borderRadius: "10px"}} />
+              <TextField {...field} label="pick a nice password" variant="filled" sx={{bgcolor: "white", borderRadius: "10px"}} />
               {Boolean(fieldState.error) && (
                      <FormHelperText>
                         {fieldState.error?.message}
@@ -74,7 +93,7 @@ export default function Register() {
             </FormControl>
           )}
         />     
-        <Button variant="contained" sx={{bgcolor: "orange", borderRadius: "20px", width:"50%"}}>Register</Button>
+        <Button variant="contained" type="submit" sx={{bgcolor: "orange", borderRadius: "20px", width:"50%"}}>Register</Button>
         <Typography variant="subtitle2">already have an account? <Link to="/auth/login">Login</Link></Typography>
 
       </Stack>
