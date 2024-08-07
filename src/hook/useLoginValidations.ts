@@ -7,10 +7,9 @@ export default function useLoginValidation() {
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:466175313.
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:3710289969.
     const schema = yup.object().shape({
-        email: yup
+        emailOrUsername: yup
            .string()
-           .required("Email is required")
-           .email("Email is invalid"),
+           .required("Email or Username is required"),
         password: yup
            .string()
            .required("Password is required")
@@ -20,7 +19,7 @@ export default function useLoginValidation() {
         useForm<ILoginForm>({
            resolver: yupResolver(schema),
            defaultValues: {
-              email: "",
+              emailOrUsername: "",
               password: "",
            },
            reValidateMode: "onSubmit",

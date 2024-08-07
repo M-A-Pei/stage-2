@@ -1,27 +1,18 @@
 import { Typography, Stack, TextField, Button, FormControl, FormHelperText } from "@mui/material"
 import DumbwaysImg from "../assets/Dumbways.png"
 import {Link} from "react-router-dom"
-import useStore from "../state/hooks"
 import { Controller } from "react-hook-form"
 import useLoginValidation from "../hook/useLoginValidations"
 import { ILoginForm } from "../types/login"
+import useLoginFunction from "../hook/useLoginFunction"
 
 
 function Login() {
-  const {setUser} = useStore()
   const { control, reset, handleSubmit } = useLoginValidation() 
+  const {handleLogin} = useLoginFunction()
 
   function onSubmit(data: ILoginForm) {
-    const dummyName = data.email.split("@")[0]
-    setUser({
-      username: dummyName,
-      email: data.email,
-      profile: {
-        avatar: "https://i.pinimg.com/originals/a9/99/ee/a999ee87f1cc57beb5cc1c60fc96cded.jpg",
-        banner: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXmX8Ywh4t3AA6OvDYaz7gXIrnWCNv1urplg&s",
-        bio: "im the default user!"
-      }
-    })
+    handleLogin(data)
     reset()
   }
 
@@ -33,11 +24,11 @@ function Login() {
       <form style={{marginTop: "10px"}} onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2} width="100%">
           <Controller
-            name="email"
+            name="emailOrUsername"
             control={control}
             render={({field, fieldState})=>(
               <FormControl error={Boolean(fieldState.error)}>
-                <TextField {...field} label="Email" variant="filled" sx={{bgcolor: "white", borderRadius: "10px"}} type="email"></TextField>
+                <TextField {...field} label="Email or Username" variant="filled" sx={{bgcolor: "white", borderRadius: "10px"}} type="text"></TextField>
                 {Boolean(fieldState.error) && (
                      <FormHelperText>
                         {fieldState.error?.message}

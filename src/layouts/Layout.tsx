@@ -32,8 +32,8 @@ function Layout() {
           }
           
 
-          <Box sx={{height: "35vh", bgcolor: "secondary.main", borderRadius: "20px", color: "white", p:2, overflowY: "scroll"}}>
-            <Typography variant="h5" gutterBottom={true}>Suggested for you</Typography>
+          <Box sx={{height: "30vh", bgcolor: "secondary.main", borderRadius: "20px", color: "white", p:2, overflowY: "scroll"}}>
+            <Typography variant="h6" gutterBottom={true}>Suggested for you</Typography>
             <Stack gap={2} direction="column">
               <MiniProfile username="Kugisaki Nobara" pfp='https://i.pinimg.com/736x/71/8d/87/718d875f00e3870c0307601c77d24358.jpg'/>
               <MiniProfile username="Fushiguro Megumi" pfp='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbs1i7Lo8m40B3osWs98w9ZrxrUpF7S4WXbA&s'/>
