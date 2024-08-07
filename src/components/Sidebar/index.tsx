@@ -3,6 +3,7 @@ import DumbwaysImg from '../../assets/Dumbways.png'
 import { Button } from "@mui/material";
 import NavLinks from "./NavLinks";
 import useStore from "../../state/hooks";
+import { toast } from 'react-toastify';
 
 export default function Sidebar() {
     const {clearUser} = useStore()
@@ -12,7 +13,7 @@ export default function Sidebar() {
             <img height='100px' width='100px' className='rounded-circle border' src={DumbwaysImg} alt="" />
             <NavLinks/>
             <Button variant="contained" sx={{bgcolor: "primary.main", borderRadius: "20px", width:"100%"}}>make new post</Button>
-            <Button onClick={()=> clearUser()} style={{color: "white", textDecoration: "none", marginTop: "auto"}}>logout &#8676;</Button>
+            <Button onClick={()=> {clearUser(); toast.success("successfully logged out!")}} style={{color: "white", textDecoration: "none", marginTop: "auto"}}>logout &#8676;</Button>
         </Stack>
     </Grid>
     )

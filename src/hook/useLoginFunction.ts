@@ -2,6 +2,7 @@ import { api } from "../api";
 import useStore from "../state/hooks";
 import { ILoginForm } from "../types/login";
 import { IUser } from "../types/store";
+import { toast } from 'react-toastify';
 
 export default function useLoginFunction(){
     const {setUser} = useStore()
@@ -21,7 +22,9 @@ export default function useLoginFunction(){
                 }
             }
             setUser(userData)
+            toast.success("login success")
         } catch (error) {
+            toast.error("login failed")
             console.log(error)
         }
     }
