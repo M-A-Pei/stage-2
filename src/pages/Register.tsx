@@ -12,6 +12,7 @@ export default function Register() {
 
   async function onSubmit(e: IRegisterForm){
     try{
+      console.log(import.meta.env.BASE_URL)
       const results = await api.post('/auth/register', e)
       console.log(results)
       reset()
