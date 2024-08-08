@@ -23,9 +23,9 @@ export default function useLoginFunction(){
             }
             setUser(userData)
             toast.success("login success")
-        } catch (error) {
-            toast.error("login failed")
+        } catch (error: any) {
             console.log(error)
+            toast.error(error.response.data.error)
         }
     }
 

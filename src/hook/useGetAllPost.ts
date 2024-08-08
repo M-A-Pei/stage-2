@@ -1,6 +1,6 @@
 import { api } from "../api";
 
-export default async function useGetAllPost(){
-    const data = await api.get("/posts")
-    return data
+export default function useGetAllPost(){
+
+    api.get("/posts").then(value => {return value})
 }

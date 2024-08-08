@@ -5,6 +5,7 @@ import useRegisterValidation from "../hook/useRegisterValidation"
 import { Controller } from "react-hook-form";
 import { IRegisterForm } from "../types/register";
 import { api } from "../api";
+import { toast } from "react-toastify";
 
 
 export default function Register() {
@@ -16,8 +17,9 @@ export default function Register() {
       const results = await api.post('/auth/register', e)
       console.log(results)
       reset()
-    }catch(error){
-      console.log(error)
+      toast.success("successfully made account!")
+    }catch(error: any){
+      toast.error(error.response.data.error)
     }
   }
 
