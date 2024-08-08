@@ -2,8 +2,9 @@ import { Stack, TextField, Button, Modal, Box} from "@mui/material"
 import Post from "../components/Post"
 import {useState} from 'react'
 import useStore from "../state/hooks"
-import useGetAllPost from "../hook/useGetAllPost";
 import { api } from "../api";
+import { toast } from "react-toastify";
+
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -20,15 +21,27 @@ const style = {
 };
 
 function Home() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); //modal states
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [post, setPost] = useState<String>("")
-  
-  const posts = useGetAllPost()
-  
+
+  const [post, setPost] = useState<String>("") //post state
 
   const {user} = useStore()
+
+  async function handlePost(){
+    const postData = {
+      title: post,
+      body: ""
+    }
+    try{
+      await api.post("/posts", postData)
+      toast.success("post made successfully")
+    }catch(error: any){
+      toast.success(error.response.data.error)
+    }
+    
+  }
 
   return (
     <>
@@ -57,7 +70,7 @@ function Home() {
                 />
           </Stack>
         
-          <Button variant="contained" sx={{bgcolor: "primary.dark", borderRadius: "20px", width: "20%", alignSelf: "end"}}>Post</Button>
+          <Button onClick={handlePost} variant="contained" sx={{bgcolor: "primary.dark", borderRadius: "20px", width: "20%", alignSelf: "end"}}>Post</Button>
         </Box>
       </Modal>
     </div>
