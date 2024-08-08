@@ -24,7 +24,7 @@ function Login() {
       <form style={{marginTop: "10px"}} onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2} width="100%">
           <Controller
-            name="emailOrUsername"
+            name="usernameOrEmail"
             control={control}
             render={({field, fieldState})=>(
               <FormControl error={Boolean(fieldState.error)}>

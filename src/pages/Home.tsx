@@ -1,8 +1,8 @@
 import { Stack, TextField, Button, Modal, Box} from "@mui/material"
-import posts from '../DummyData/posts'
 import Post from "../components/Post"
 import {useState} from 'react'
 import useStore from "../state/hooks"
+import useGetAllPost from "../hook/useGetAllPost";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -23,6 +23,8 @@ function Home() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [post, setPost] = useState<String>("")
+  const posts = useGetAllPost().then((value)=> {return value})
+  console.log(posts)
 
   const {user} = useStore()
 
@@ -79,9 +81,9 @@ function Home() {
             <Button variant="contained" onClick={handleOpen} sx={{bgcolor: "primary.dark", borderRadius: "20px", height:"50%"}}>Post</Button>
         </Stack>
         
-        {posts.map((e, i) => (
+        {/* {posts.map((e, i) => (
           <Post i={i} key={i} name={e.name} text={e.text}/>
-        ))}
+        ))} */}
     </Stack>
     </>
   )

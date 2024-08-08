@@ -4,10 +4,8 @@ import * as yup from 'yup'
 import { ILoginForm } from '../types/login'
 
 export default function useLoginValidation() {
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:466175313.
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:3710289969.
     const schema = yup.object().shape({
-        emailOrUsername: yup
+        usernameOrEmail: yup
            .string()
            .required("Email or Username is required"),
         password: yup
@@ -19,7 +17,7 @@ export default function useLoginValidation() {
         useForm<ILoginForm>({
            resolver: yupResolver(schema),
            defaultValues: {
-              emailOrUsername: "",
+              usernameOrEmail: "",
               password: "",
            },
            reValidateMode: "onSubmit",
