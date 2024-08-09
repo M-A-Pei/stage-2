@@ -1,6 +1,6 @@
 import { api } from "../api";
 
-export default function useGetAllPost(){
+export default async function useGetAllPost(){
 
-    api.get("/posts").then(value => {return value})
+    return await api.get("/posts")
 }

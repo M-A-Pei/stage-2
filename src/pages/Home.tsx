@@ -1,10 +1,10 @@
 import { Stack, TextField, Button, Modal, Box} from "@mui/material"
 import Post from "../components/Post"
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import useStore from "../state/hooks"
-import { api } from "../api";
+import { api, setAuthToken } from "../api";
 import { toast } from "react-toastify";
-
+import useGetAllPost from "../hook/useGetAllPost";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -24,17 +24,28 @@ function Home() {
   const [open, setOpen] = useState(false); //modal states
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [posts, setPosts] = useState([])
 
   const [post, setPost] = useState<String>("") //post state
+
+  useEffect(()=>{
+    getPost()
+  }, [])
+
+  async function getPost(){
+    const response = await useGetAllPost()
+    setPosts(response.data)
+  }
 
   const {user} = useStore()
 
   async function handlePost(){
     const postData = {
-      title: post,
-      body: ""
+      title: "",
+      body: post
     }
     try{
+      setAuthToken(user.token)
       await api.post("/posts", postData)
       toast.success("post made successfully")
     }catch(error: any){
@@ -95,6 +106,10 @@ function Home() {
                 />
             <Button variant="contained" onClick={handleOpen} sx={{bgcolor: "primary.dark", borderRadius: "20px", height:"50%"}}>Post</Button>
         </Stack>
+
+        {posts.map((element: any, i)=>{
+          return(<Post name={element.author.username} text={element.body} i={i}/>)
+        })}
     
     </Stack>
     </>

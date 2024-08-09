@@ -13,6 +13,7 @@ export default function useLoginFunction(){
             const token = response.data
             const user = await api.get("/auth", {headers: {Authorization: token}})
             const userData: IUser = {
+                token: user.data.token,
                 username: user.data.username,
                 email: user.data.email,
                 profile: {

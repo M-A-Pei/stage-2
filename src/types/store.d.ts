@@ -9,6 +9,7 @@ export interface IStoreStates {
  }
  
  export interface IUser {
+    token: string;
     profile: IProfile;
     username: string;
     email: string;

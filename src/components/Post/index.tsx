@@ -7,6 +7,7 @@ interface IPost {
     name: string;
     text: string;
     i: number;
+    
 }
 
 export default function Post({name, text, i}: IPost) {
