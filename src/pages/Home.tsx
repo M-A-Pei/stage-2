@@ -5,6 +5,7 @@ import useStore from "../state/hooks"
 import { api, setAuthToken } from "../api";
 import { toast } from "react-toastify";
 import useGetAllPost from "../hook/useGetAllPost";
+import DEFAULTPFP from "../assets/defaults/defaultpfp.jpg"
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -27,7 +28,6 @@ function Home() {
   const [posts, setPosts] = useState([])
 
   const [post, setPost] = useState<String>("") //post state
-
   useEffect(()=>{
     getPost()
   }, [])
@@ -48,8 +48,10 @@ function Home() {
       setAuthToken(user.token)
       await api.post("/posts", postData)
       toast.success("post made successfully")
+      handleClose()
     }catch(error: any){
       toast.success(error.response.data.error)
+      handleClose()
     }
     
   }
@@ -108,7 +110,7 @@ function Home() {
         </Stack>
 
         {posts.map((element: any, i)=>{
-          return(<Post name={element.author.username} text={element.body} i={i}/>)
+          return(<Post key={i} name={element.author.username} text={element.body} pfp={element.author.profilePic || DEFAULTPFP} i={element.id}/>)
         })}
     
     </Stack>

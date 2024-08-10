@@ -3,6 +3,8 @@ import useStore from "../state/hooks";
 import { ILoginForm } from "../types/login";
 import { IUser } from "../types/store";
 import { toast } from 'react-toastify';
+import DEFAULTPFP from "../assets/defaults/defaultpfp.jpg"
+import DEFAULTBANNER from "../assets/defaults/defaultBanner.avif"
 
 export default function useLoginFunction(){
     const {setUser} = useStore()
@@ -17,9 +19,9 @@ export default function useLoginFunction(){
                 username: user.data.username,
                 email: user.data.email,
                 profile: {
-                    avatar: user.data.profile || "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
+                    avatar: user.data.profile || DEFAULTPFP,
                     bio: user.data.description,
-                    banner: user.data.banner || "https://img.freepik.com/free-photo/gray-wall-textures-background_74190-4389.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1722902400&semt=ais_hybrid"
+                    banner: user.data.banner || DEFAULTBANNER
                 }
             }
             setUser(userData)
