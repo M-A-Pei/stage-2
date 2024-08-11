@@ -11,6 +11,7 @@ import Error from "../pages/Error"
 import Profile from "../pages/Profile"
 import AllPost from "../pages/Profile/AllPost"
 import Media from "../pages/Profile/Media"
+import EditProfile from "../pages/EditProfile";
 
 let route: RouteObject[] = [
     {
@@ -32,6 +33,10 @@ let route: RouteObject[] = [
             {
                 path: "detail/:id",
                 element: <Detail/>
+            },
+            {
+                path: "editProfile",
+                element: <EditProfile/>
             },
             {
                 path: "profile/:userID?",

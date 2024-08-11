@@ -21,6 +21,18 @@ const style = {
   flexDirection: "column"
 };
 
+const inputStyle = {
+  borderRadius: "10px",
+  mb: "15px",
+  "& .MuiInputLabel-filled": {
+    color: "gray",
+  },
+  "& .MuiFilledInput-input": {
+    color: "white"
+  },
+  width: "100%",
+  }
+
 function Home() {
   const [open, setOpen] = useState(false); //modal states
   const handleOpen = () => setOpen(true);
@@ -68,19 +80,7 @@ function Home() {
         <Box sx={style}>
           <Stack flexDirection="row" sx={{marginBottom: "30px"}}>
             <img height='40px' width='40px' style={{borderRadius: "50%", margin: "5px"}} src={user.profile.avatar} alt="" />
-            <TextField value={post} onChange={(e) => setPost(e.target.value)} label="whats on your mind?" color="primary" variant='filled'
-              sx={{
-                borderRadius: "10px",
-                mb: "15px",
-                "& .MuiInputLabel-filled": {
-                  color: "gray",
-                },
-                "& .MuiFilledInput-input": {
-                  color: "white"
-                },
-                width: "100%",
-                }} size="small"
-                />
+            <TextField value={post} onChange={(e) => setPost(e.target.value)} label="whats on your mind?" color="primary" variant='filled' sx={inputStyle} size="small"/>
           </Stack>
         
           <Button onClick={handlePost} variant="contained" sx={{bgcolor: "primary.dark", borderRadius: "20px", width: "20%", alignSelf: "end"}}>Post</Button>
@@ -92,21 +92,8 @@ function Home() {
         <h1>Home Page</h1>
         <Stack borderBottom={"1px solid gray"} direction="row" alignContent="center" justifyContent="center">
           <img height='60px' width='60px' style={{borderRadius: "50%", margin: "5px"}} src={user.profile.avatar} alt="" />
-          <TextField value={post} onChange={(e) => setPost(e.target.value)} label="whats on your mind?" color="primary" variant='filled'
-              sx={{
-                borderRadius: "10px",
-                color: "white",
-                mb: "15px",
-                "& .MuiInputLabel-filled": {
-                  color: "gray",
-                },
-                "& .MuiFilledInput-input": {
-                  color: "white"
-                },
-                width: "100%",
-                }} size="small"
-                />
-            <Button variant="contained" onClick={handleOpen} sx={{bgcolor: "primary.dark", borderRadius: "20px", height:"50%"}}>Post</Button>
+          <TextField value={post} onChange={(e) => setPost(e.target.value)} label="whats on your mind?" color="primary" variant='filled' sx={inputStyle} size="small"/>
+          <Button variant="contained" onClick={handleOpen} sx={{bgcolor: "primary.dark", borderRadius: "20px", height:"50%"}}>Post</Button>
         </Stack>
 
         {posts.map((element: any, i)=>{

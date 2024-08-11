@@ -20,6 +20,7 @@ export default function useRegisterValidation() {
          description: yup
            .string()
            .required("description is required")
+           .max(30 ,"description cant be longer than 30 characters")
      });
 
      return(
