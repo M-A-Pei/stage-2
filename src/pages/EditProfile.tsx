@@ -24,7 +24,7 @@ export default function EditProfile(){
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form style={{padding: "40px"}} encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)}>
             <Stack gap={2} direction="column">
                 <h1>Edit Your Profile</h1>
                 <Controller
