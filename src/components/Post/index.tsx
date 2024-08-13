@@ -37,8 +37,8 @@ export default function Post({name, text, i, pfp}: IPost) {
     setAuthToken(user.token)
     await api.post(`/like/${i}`)            //send request untuk membuat like baru
     const x = await api.get(`/like/${i}`)   //ambil semua like di suatu post
-    setLike(x.data.length)                  //update state like
-    await checkLike()                       //update state isLiked
+    setLike(x.data.length)                  //update state like dengan panjang response
+    await checkLike()                       //update state isLiked dengan memanggil ulang checkLike()
   }
 
   useEffect(()=>{
