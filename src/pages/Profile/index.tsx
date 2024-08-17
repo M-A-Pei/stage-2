@@ -3,8 +3,23 @@ import { useParams, Outlet, NavLink} from "react-router-dom"
 import useStore from "../../state/hooks"
 import profile from "../../DummyData/profile"
 import { Box, Button, Stack } from "@mui/material"
+import { useState } from "react"
+import { api } from "../../api"
 
 export default function Profile(){
+    // const {userID} = useParams()
+    // const [user, setUser] = useState()
+
+    // async function getUser(){
+    //     try {
+    //         const x = await api.get(`/users/${userID}`)
+    //         setUser(x.data)
+    //         console.log(user)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+    
     const {userID} = useParams()
     const {user} = useStore()
     let data

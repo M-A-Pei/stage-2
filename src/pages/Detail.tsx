@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function Detail(){
     const {id} = useParams();
     const [post, setPost] = useState<any>({})
+    const [done, setDone] = useState(false)
 
     useEffect(()=>{
         getPost()
@@ -15,13 +16,16 @@ export default function Detail(){
         try {
             const response = await api.get(`/posts/${id}`)
             setPost(response.data)
+            setDone(true)
         } catch (error) {
             console.log(error)
         }
     }
 
     return (
-        <Post i={post.id} name={post.author.username} pfp={post.author.profilePic} text={post.body}/>
+        <>
+        {done && <Post i={post.id} name={post.author.username} pfp={post.author.profilePic} text={post.body}/>}
+        </>
     )
 
 

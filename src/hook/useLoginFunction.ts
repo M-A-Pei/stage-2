@@ -19,7 +19,7 @@ export default function useLoginFunction(){
                 username: user.data.username,
                 email: user.data.email,
                 profile: {
-                    avatar: user.data.profile || DEFAULTPFP,
+                    avatar: user.data.profilePic || DEFAULTPFP,
                     bio: user.data.description,
                     banner: user.data.banner || DEFAULTBANNER
                 }
