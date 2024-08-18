@@ -95,7 +95,6 @@ function Home() {
           <TextField value={post} onChange={(e) => setPost(e.target.value)} label="whats on your mind?" color="primary" variant='filled' sx={inputStyle} size="small"/>
           <Button variant="contained" onClick={handleOpen} sx={{bgcolor: "primary.dark", borderRadius: "20px", height:"50%"}}>Post</Button>
         </Stack>
-
         {posts.map((element: any, i)=>{
           return(<Post key={i} name={element.author.username} text={element.body} pfp={element.author.profilePic || DEFAULTPFP} i={element.id}/>)
         })}

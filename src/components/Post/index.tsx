@@ -58,7 +58,7 @@ export default function Post({name, text, i, pfp}: IPost) {
             <p>{like}</p>
             </Stack>
             <Stack direction="row" gap={1}>
-                <Link to={`/detail/${i}`} style={{textDecoration: "none", color: "white", marginBottom: "10px"}}><CommentIcon fontSize="small"/></Link>
+                <Link to={`/reply/${i}`} style={{textDecoration: "none", color: "white", marginBottom: "10px"}}><CommentIcon fontSize="small"/></Link>
             <p>0</p>
             </Stack>
         </Stack>
