@@ -39,7 +39,7 @@ let route: RouteObject[] = [
                 element: <EditProfile/>
             },
             {
-                path: "profile/:userID?",
+                path: "profile/:userID",
                 element: <Profile/>,
                 children: [
                     {

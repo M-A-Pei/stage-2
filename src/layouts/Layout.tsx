@@ -1,4 +1,4 @@
-import {Outlet, Navigate, useLocation} from 'react-router-dom'
+import {Outlet, Navigate, useLocation, useParams} from 'react-router-dom'
 import { Box, Grid, Stack, Typography } from '@mui/material'
 import YouTubeIcon from '@mui/icons-material/YouTube'
 import TwitterIcon from '@mui/icons-material/Twitter'
@@ -7,10 +7,38 @@ import Sidebar from '../components/Sidebar'
 import useStore from '../state/hooks'
 import MiniProfile from '../components/MiniProfile'
 import ProfileBar from '../components/ProfileBar'
+import { useEffect, useState } from 'react'
+import { api } from '../api'
+
+async function checkLoadProfileBar(FeUser: any, userID: any, setLoadProfileBar:Function){
+  const stringedLocation = location.toString()
+  if(!stringedLocation.includes("profile")){
+      return
+  }
+
+  try{
+    const x = await api.get(`/users/ById/${userID}`)
+    const BeUser = x.data
+    if(BeUser.email != FeUser.email){
+      return
+    }
+  }catch(error){
+    console.log(error)
+  }
+
+  setLoadProfileBar(false)
+}
+
 
 function Layout() {
   const {isLogin, user} = useStore()
   const location = useLocation().pathname
+  const [LoadProfileBar, setLoadProfileBar] = useState(true)
+  const {userID} = useParams()
+
+  useEffect(()=>{
+    checkLoadProfileBar(user, userID, setLoadProfileBar)
+  }, [location])
 
   if(!isLogin){
     return <Navigate to="/auth/login"/>
@@ -27,7 +55,7 @@ function Layout() {
       <Grid item xs={4} sx={{height: "100vh", bgcolor: "secondary.dark", borderLeft: "1px solid white"}}>
         <Stack direction="column" spacing={2} sx={{height: "100vh", p:2}}>
 
-          {!(location == "/profile/media" || location == "/profile" || location == "/profile/allpost") &&
+          {LoadProfileBar &&
             <ProfileBar username={user.username} bio={user.profile.bio} pfp={user.profile.avatar} banner={user.profile.banner}/>
           }
           

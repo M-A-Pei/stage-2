@@ -1,11 +1,30 @@
+import { useEffect, useState } from "react"
 import Post from "../../components/Post"
-import posts from '../../DummyData/posts'
+import { useOutletContext} from "react-router-dom"
+import { api } from "../../api"
 
 export default function AllPost(){
+    const [posts, setPosts] = useState<any>([])
+    const user = useOutletContext()
+
+    async function GetAllPost(){
+        try {
+            const x = await api.get(`/reply/user/${user.username}`)
+            const allPosts = [...x.data]
+            setPosts(allPosts)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(()=>{
+        GetAllPost()
+    }, [])
+
     return (
         <>
-        {posts.map((e, i) => (
-            <Post i={i} name={e.name} text={e.text} pfp=""/>
+        {posts.map((e) => (
+            <Post i={e.id} name={user.username} text={e.body} pfp=""/>
           ))}
         </>
     )
