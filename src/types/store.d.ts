@@ -1,24 +1,24 @@
 export interface IStoreStates {
-    user: IUser;
-    isLogin: boolean;
- }
- 
- export interface IStoreActions {
-    setUser: (user: IUser) => void;
-    clearUser: () => void;
- }
- 
- export interface IUser {
-    token: string;
-    profile: IProfile;
-    username: string;
-    email: string;
- }
- 
- export interface IProfile {
-    avatar: string;
-    banner: string;
-    bio: string;
- }
- 
- export type TStore = IStoreStates & IStoreActions;
+  user: IUser;
+  isLogin: boolean;
+}
+
+export interface IStoreActions {
+  setUser: (user: IUser) => void;
+  clearUser: () => void;
+}
+
+export interface IUser {
+  token: string;
+  profile: IProfile;
+  username: string;
+  email: string;
+}
+
+export interface IProfile {
+  avatar: string;
+  banner: string;
+  bio: string;
+}
+
+export type TStore = IStoreStates & IStoreActions;
