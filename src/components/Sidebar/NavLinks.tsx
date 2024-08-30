@@ -56,7 +56,7 @@ export default function NavLinks() {
         )}
       </NavLink>
 
-      <NavLink to="/followers" style={{ textDecoration: "none" }}>
+      <NavLink to="/follow/following" style={{ textDecoration: "none" }}>
         {({ isActive }) => (
           <Stack
             gap={1}

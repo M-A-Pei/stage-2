@@ -24,9 +24,6 @@ export default function useEditProfileValidation(){
             .string()
             .required("description is required")
             .max(30 ,"description cant be longer than 30 characters"),
-        profilePic: yup
-            .string()
-        
     });
     
     return(
@@ -36,7 +33,6 @@ export default function useEditProfileValidation(){
                 description: user.profile.bio,
                 email: user.email,
                 password: "",
-                profilePic: "",
                 username: user.username
              },
              reValidateMode: "onSubmit",

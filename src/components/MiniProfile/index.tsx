@@ -1,19 +1,34 @@
-import { Button, Stack } from "@mui/material";
+import { Avatar, Stack } from "@mui/material";
+import { Link } from "react-router-dom";
+import FollowButton from '../Buttons/FollowButton';
 
-interface IMiniProfile{
-    pfp: string,
-    username: String,
+interface IMiniProfile {
+  pfp: string;
+  username: String;
+  id: number;
 }
 
-export default function MiniProfile({pfp, username}: IMiniProfile) {
-  return(
+
+export default function MiniProfile({ pfp, username, id }: IMiniProfile) {
+  return (
     <Stack direction="row" gap={1}>
-        <img src={pfp} width="45px" style={{borderRadius: "50%"}} alt="" />
+      <Avatar
+        sx={{
+          width: "50px",
+          height: "50px",
+        }}
+        src={`http://localhost:3000/uploads/${pfp}`}
+      />
+      <Link
+        to={`/profile/${id}/allpost`}
+        style={{ textDecoration: "none", color: "white" }}
+      >
         <Stack direction="column">
-            <h5>{username}</h5>
-            <small style={{color: "gray"}}>@{username}</small>
+          <h3>{username}</h3>
+          <small style={{ color: "gray" }}>@{username}</small>
         </Stack>
-        <Button variant='contained' sx={{bgcolor: "secondary.light", borderRadius: "20px", color: "white", fontSize:"10px", ml:"auto", p:"6px", height: "50%", alignSelf: "center"}}>follow</Button>
+      </Link>
+      <FollowButton id={id}/>
     </Stack>
-  )
+  );
 }

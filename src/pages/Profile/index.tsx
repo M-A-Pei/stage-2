@@ -3,8 +3,6 @@ import { useParams, Outlet, NavLink } from "react-router-dom";
 import { Box, Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { api } from "../../api";
-import DEFAULTPFP from "../../assets/defaults/defaultpfp.jpg";
-import DEFAULTBANNER from "../../assets/defaults/defaultBanner.avif";
 
 interface IUser {
   username: string;
@@ -12,7 +10,7 @@ interface IUser {
   profilePic: string;
   id: number;
   email: string;
-  banner: string;
+  bannerPic: string;
 }
 
 export default function Profile() {
@@ -23,7 +21,7 @@ export default function Profile() {
     profilePic: "",
     id: 0,
     email: "",
-    banner: "",
+    bannerPic: "",
   });
   const [done, setDone] = useState(false);
 
@@ -45,9 +43,10 @@ export default function Profile() {
     <Stack flexDirection="column">
       <ProfileBar
         username={user.username}
-        pfp={user.profilePic || DEFAULTPFP}
-        banner={user.banner || DEFAULTBANNER}
+        pfp={user.profilePic}
+        banner={user.bannerPic}
         bio={user.description}
+        id={user.id}
       />
 
       <Box

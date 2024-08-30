@@ -1,16 +1,54 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import useStore from "../../state/hooks";
+import { api, setAuthToken } from "../../api";
+import { useEffect, useState } from "react";
+import EditUserModal from '../Modals/EditUserModal';
+import FollowButton from "../Buttons/FollowButton";
 
 interface IProfile {
   username: string;
   pfp: string;
   banner: string;
   bio: string;
+  id?: number
 }
 
-export default function ProfileBar({ username, pfp, banner, bio }: IProfile) {
+async function getFollowers(setFollowers: Function) {
+  try {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAuthToken(token);
+    }
+    const x = await api.get("/follow/followers");
+    setFollowers(x.data.length);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getFollowing(setFollowing: Function) {
+  try {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAuthToken(token);
+    }
+    const x = await api.get("/follow/following");
+    setFollowing(x.data.length);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export default function ProfileBar({ username, pfp, banner, bio, id }: IProfile) {
   const { user } = useStore();
+  const [followers, setFollowers] = useState(0);
+  const [following, setFollowing] = useState(0);
+
+  useEffect(() => {
+    getFollowers(setFollowers);
+    getFollowing(setFollowing);
+  });
 
   return (
     <Box
@@ -18,7 +56,8 @@ export default function ProfileBar({ username, pfp, banner, bio }: IProfile) {
     >
       <Box
         sx={{
-          backgroundImage: "url(" + banner + ")",
+          backgroundImage: `url("http://localhost:3000/uploads/${banner}")`,
+          backgroundColor: "white",
           height: "35%",
           backgroundRepeat: "repeat-y",
           backgroundSize: "cover",
@@ -26,54 +65,23 @@ export default function ProfileBar({ username, pfp, banner, bio }: IProfile) {
         }}
       ></Box>
       <Box display="flex" sx={{ height: "20%" }}>
-        <img
-          height="90px"
-          width="90px"
-          src={pfp}
-          style={{
-            top: "-50px",
-            position: "relative",
-            borderRadius: "50%",
-            margin: "5px",
-          }}
-          alt=""
-        />
-        {user.username === username ? (
-          <Link
-            style={{ textDecoration: "none", marginLeft: "auto" }}
-            to="/editProfile"
-          >
-            <Button
-              variant="contained"
-              sx={{
-                bgcolor: "secondary.light",
-                borderRadius: "10px",
-                height: "60%",
-                marginTop: "5px",
-                marginRight: "5px",
-                fontSize: "8px",
-                color: "white",
-              }}
-            >
-              Edit Profile
-            </Button>
-          </Link>
-        ) : (
-          <Button
-            variant="contained"
+        <Link to={user.username === username ? `/editAvatar` : ""}>
+          <Avatar
             sx={{
-              bgcolor: "secondary.light",
-              ml: "auto",
-              borderRadius: "10px",
-              height: "60%",
-              marginTop: "5px",
-              marginRight: "5px",
-              fontSize: "8px",
-              color: "white",
+              height: "90px",
+              width: "90px",
+              position: "relative",
+              left: "5%",
+              top: "-50px",
             }}
-          >
-            Follow
-          </Button>
+            src={`http://localhost:3000/uploads/${pfp}`}
+            alt=""
+          />
+        </Link>
+        {user.username === username ? (
+            <EditUserModal/>
+        ) : (
+          <FollowButton id={id}/>
         )}
       </Box>
       <Box
@@ -88,7 +96,7 @@ export default function ProfileBar({ username, pfp, banner, bio }: IProfile) {
         <Typography sx={{ fontSize: "13px" }}>{bio}</Typography>
         <Box display="flex">
           <Typography sx={{ fontSize: "13px", marginRight: "5px" }}>
-            100
+            {following}
           </Typography>
           <Typography
             sx={{ fontSize: "13px", marginRight: "25px", color: "gray" }}
@@ -96,7 +104,7 @@ export default function ProfileBar({ username, pfp, banner, bio }: IProfile) {
             following
           </Typography>
           <Typography sx={{ fontSize: "13px", marginRight: "5px" }}>
-            100
+            {followers}
           </Typography>
           <Typography sx={{ fontSize: "13px", color: "gray" }}>
             followers

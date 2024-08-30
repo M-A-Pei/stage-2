@@ -2,20 +2,18 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CommentIcon from "@mui/icons-material/Comment";
 import { Link } from "react-router-dom";
-import { Stack } from "@mui/material";
+import { Avatar, Stack } from "@mui/material";
 import { useState, useEffect } from "react";
 import { api, setAuthToken } from "../../api";
-import useStore from "../../state/hooks";
 import { IPost } from "../../types/post";
-import DEFAULTPFP from "../../assets/defaults/defaultpfp.jpg";
+import ImageDetailModal from "../Modals/ImageDetailModal";
 
-export default function Post({ name, text, i, pfp }: IPost) {
+export default function Post({ name, text, i, pfp, img }: IPost) {
   const [like, setLike] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
-  const { user } = useStore();
-
+  const [replies, setReplies] = useState(0);
   async function checkLike() {
-    setAuthToken(user.token);
+    setAuthToken(localStorage.getItem("token") || "");
     const response = await api.get(`/like/check/${i}`); //send request untuk check kalo udh di like blm
     const liked = response.data;
     if (liked) setIsLiked(true);
@@ -28,26 +26,32 @@ export default function Post({ name, text, i, pfp }: IPost) {
   }
 
   async function handleLike() {
-    setAuthToken(user.token);
+    setAuthToken(localStorage.getItem("token") || "");
     await api.post(`/like/${i}`); //send request untuk membuat like baru
     const x = await api.get(`/like/${i}`); //ambil semua like di suatu post
     setLike(x.data.length); //update state like dengan panjang response
     await checkLike(); //update state isLiked dengan memanggil ulang checkLike()
   }
 
+  async function getReplies() {
+    try {
+      const response = await api.get(`/reply/${i}`);
+      setReplies(response.data.length);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     checkLike();
     getLikes();
+    getReplies();
   }, []);
 
   return (
     <Stack direction="row" gap={1} key={i}>
-      <img
-        src={pfp || DEFAULTPFP}
-        width="45px"
-        height="45px"
-        style={{ borderRadius: "50%" }}
-        alt=""
+      <Avatar
+        src={`http://localhost:3000/uploads/${pfp}`}
       />
       <Stack direction="column" gap={1}>
         <Stack direction="row" gap={1}>
@@ -55,6 +59,14 @@ export default function Post({ name, text, i, pfp }: IPost) {
           <small style={{ color: "gray" }}>@{name}</small>
           <small>&#x2022; 4h ago</small>
         </Stack>
+
+        <Stack direction="row" gap={1} flexWrap={"wrap"}>
+          {img.map((element:any, index: number) => (
+            <ImageDetailModal image={element.image} postId={i} key={index}/>
+          ))}
+        </Stack>
+
+       
         <p>{text}</p>
         <Stack direction="row" gap={4}>
           <Stack direction="row" gap={1}>
@@ -87,7 +99,7 @@ export default function Post({ name, text, i, pfp }: IPost) {
             >
               <CommentIcon fontSize="small" />
             </Link>
-            <p>0</p>
+            <p>{replies}</p>
           </Stack>
         </Stack>
       </Stack>

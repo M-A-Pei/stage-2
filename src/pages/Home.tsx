@@ -1,25 +1,13 @@
-import { Stack, TextField, Button, Modal, Box } from "@mui/material";
+import { Avatar, Button, Stack, TextField } from "@mui/material";
 import Post from "../components/Post";
 import { useState, useEffect } from "react";
 import useStore from "../state/hooks";
-import { api, setAuthToken } from "../api";
-import { toast } from "react-toastify";
 import useGetAllPost from "../hook/useGetAllPost";
 import DEFAULTPFP from "../assets/defaults/defaultpfp.jpg";
-
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "secondary.dark",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 2,
-  display: "flex",
-  flexDirection: "column",
-};
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import SendIcon from '@mui/icons-material/Send';
+import { api } from "../api";
+import { toast } from "react-toastify";
 
 const inputStyle = {
   borderRadius: "10px",
@@ -34,12 +22,10 @@ const inputStyle = {
 };
 
 function Home() {
-  const [open, setOpen] = useState(false); //modal states
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const { user } = useStore();
+  const [post, setPost] = useState<string>(""); //post state
+  const [images, setImages] = useState({} as any)
   const [posts, setPosts] = useState([]);
-
-  const [post, setPost] = useState<String>(""); //post state
   useEffect(() => {
     getPost();
   }, []);
@@ -49,69 +35,35 @@ function Home() {
     setPosts(response.data);
   }
 
-  const { user } = useStore();
-
-  async function handlePost() {
-    const postData = {
-      title: "",
-      body: post,
-    };
-    try {
-      setAuthToken(user.token);
-      await api.post("/posts", postData);
-      toast.success("post made successfully");
-      handleClose();
-    } catch (error: any) {
-      toast.error(error.response.data.error);
-      handleClose();
-    }
+  function onChangeFile(e: any){
+    setImages(e.target.files)
   }
 
+  async function handlePost() {
+    const postData = new FormData();
+    for(let i = 0; i < images.length; i++){
+      postData.append("images", images[i])
+    }
+    postData.append("body", post);
+    try {
+      const token = localStorage.getItem("token");
+      await api.post("/posts", postData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: "Bearer " + token
+        }
+      });
+      toast.success("post made successfully");
+      setPost("")
+      setImages("")
+      getPost();
+    } catch (error: any) {
+      toast.error(error.response);
+    }
+  }
+ 
+
   return (
-    <>
-      <div>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Stack flexDirection="row" sx={{ marginBottom: "30px" }}>
-              <img
-                height="40px"
-                width="40px"
-                style={{ borderRadius: "50%", margin: "5px" }}
-                src={user.profile.avatar}
-                alt=""
-              />
-              <TextField
-                value={post}
-                onChange={(e) => setPost(e.target.value)}
-                label="whats on your mind?"
-                color="primary"
-                variant="filled"
-                sx={inputStyle}
-                size="small"
-              />
-            </Stack>
-
-            <Button
-              onClick={handlePost}
-              variant="contained"
-              sx={{
-                bgcolor: "primary.dark",
-                borderRadius: "20px",
-                width: "20%",
-                alignSelf: "end",
-              }}
-            >
-              Post
-            </Button>
-          </Box>
-        </Modal>
-      </div>
-
       <Stack spacing={3} direction="column">
         <h1>Home Page</h1>
         <Stack
@@ -119,34 +71,36 @@ function Home() {
           direction="row"
           alignContent="center"
           justifyContent="center"
+          gap={1}
         >
-          <img
-            height="60px"
-            width="60px"
-            style={{ borderRadius: "50%", margin: "5px" }}
-            src={user.profile.avatar}
+          <Avatar
+            sx={{ height: "60px", width: "60px" }}
+            src={`http://localhost:3000/uploads/${user.profile.avatar}`} 
             alt=""
           />
           <TextField
-            value={post}
-            onChange={(e) => setPost(e.target.value)}
             label="whats on your mind?"
             color="primary"
             variant="filled"
+            onChange={(e) => setPost(e.target.value)}
             sx={inputStyle}
             size="small"
           />
+          <input onChange={onChangeFile} multiple type="file" hidden id='postImage' />
+          <label htmlFor="postImage"><AddAPhotoIcon  sx={{color: "white"}}/></label>
           <Button
-            variant="contained"
-            onClick={handleOpen}
-            sx={{
-              bgcolor: "primary.dark",
-              borderRadius: "20px",
-              height: "50%",
-            }}
-          >
-            Post
-          </Button>
+                onClick={handlePost}
+                variant="contained"
+                sx={{
+                  bgcolor: "primary.dark",
+                  borderRadius: "10px",
+                  height: "40%",
+                  p: 1
+                }}
+              >
+                <SendIcon />
+            </Button>
+          
         </Stack>
         {posts.map((element: any, i) => {
           return (
@@ -156,11 +110,11 @@ function Home() {
               text={element.body}
               pfp={element.author.profilePic || DEFAULTPFP}
               i={element.id}
+              img={element.images}
             />
           );
         })}
       </Stack>
-    </>
   );
 }
 

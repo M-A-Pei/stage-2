@@ -23,9 +23,12 @@ export default function AllPost() {
 
   return (
     <>
-      {posts.map((e: any, i: number) => (
-        <Post i={e.id} name={user.username} text={e.body} key={i} pfp="" />
-      ))}
+      {posts.map((e: any, i: number) => {
+        if (e.parentId == null)
+          return (
+            <Post img={e.images} i={e.id} name={user.username} text={e.body} key={i} pfp="" />
+          );
+      })}
     </>
   );
 }

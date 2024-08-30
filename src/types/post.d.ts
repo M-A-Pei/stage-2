@@ -3,4 +3,5 @@ export interface IPost {
     name: string;
     text: string;
     i: number;
+    img: string[];
 }

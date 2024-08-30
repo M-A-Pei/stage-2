@@ -3,5 +3,4 @@ export interface IEditProfileForm{
     email: string,
     password: string,
     description: string,
-    profilePic?: string
 }
