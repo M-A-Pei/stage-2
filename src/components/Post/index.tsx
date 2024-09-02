@@ -51,7 +51,7 @@ export default function Post({ name, text, i, pfp, img }: IPost) {
   return (
     <Stack direction="row" gap={1} key={i}>
       <Avatar
-        src={`http://localhost:3000/uploads/${pfp}`}
+        src={`${pfp}`}
       />
       <Stack direction="column" gap={1}>
         <Stack direction="row" gap={1}>

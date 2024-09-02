@@ -61,7 +61,7 @@ export default function ReplyBar({id}: any) {
           height="40px"
           width="40px"
           style={{ borderRadius: "50%", margin: "5px" }}
-          src={`http://localhost:3000/uploads/${user.profile.avatar}`}
+          src={`/${user.profile.avatar}`}
           alt=""
         />
         <TextField

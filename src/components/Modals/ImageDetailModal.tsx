@@ -41,7 +41,7 @@ const style = {
 
   return (
     <>
-        <Avatar onClick={handleOpen} sx={{width: "120px", height: "120px"}} src={`http://localhost:3000/uploads/${image}`} alt="" />
+        <Avatar onClick={handleOpen} sx={{width: "120px", height: "120px"}} src={`/${image}`} alt="" />
 
         <div>
         <Modal
@@ -51,7 +51,7 @@ const style = {
             <Box sx={style}>
                 <Stack gap={1} direction={"row"} style={{textAlign: "center", alignItems: "center", color: "white", height: "100%"}}>
                     <HighlightOffIcon fontSize="large" sx={{cursor: "pointer", color: "white", position: "absolute", top: 0, right: 0}} onClick={handleClose}/>
-                    <img height={"100%"} style={{maxWidth: "70%"}} src={`http://localhost:3000/uploads/${image}`} alt="" />
+                    <img height={"100%"} style={{maxWidth: "70%"}} src={`/${image}`} alt="" />
                     <Stack gap={2} direction={"column"} sx={{flexGrow: 1, overflowY: "scroll"}} height={"100%"}>
                         {done && (
                           <Post

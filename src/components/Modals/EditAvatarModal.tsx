@@ -59,7 +59,7 @@ export default function EditAvatarModal() {
             height: "100px",
             width: "100px",
         }}
-        src={`http://localhost:3000/uploads/${user.profile.avatar}`}
+        src={`/${user.profile.avatar}`}
         alt=""
         />
     </Button>
@@ -74,7 +74,7 @@ export default function EditAvatarModal() {
                     <Stack gap={1} direction={"column"} style={{textAlign: "center", alignItems: "center", color: "white"}}>
                         <h1>Edit Avatar</h1>
                         <label htmlFor="avatar">
-                            <Avatar sx={{width: 200, height: 200}} src={`http://localhost:3000/uploads/${user.profile.avatar}`}/>
+                            <Avatar sx={{width: 200, height: 200}} src={`/${user.profile.avatar}`}/>
                             <AddAPhotoIcon sx={{position: "relative", top: "-130px", color: "black", width: 70, height: 70}}/>
                         </label>
                         <input id="avatar" type="file" hidden onChange={onChangeFile}/>

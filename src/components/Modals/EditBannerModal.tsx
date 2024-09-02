@@ -66,7 +66,7 @@ export default function EditBannerModal() {
                     <label htmlFor="avatar">
                         <Box
                             sx={{
-                            backgroundImage: `url("http://localhost:3000/uploads/${user.profile.banner}")`,
+                            backgroundImage: `url("/${user.profile.banner}")`,
                             backgroundColor: 'whitesmoke',
                             width: "700px",
                             height: "200px",

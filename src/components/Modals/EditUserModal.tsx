@@ -59,7 +59,7 @@ export default function EditUserModal() {
               <h3 style={{color: "white"}}>Edit Your Profile</h3>
               <Box
                 sx={{
-                  backgroundImage: `url("http://localhost:3000/uploads/${user.profile.banner}")`,
+                  backgroundImage: `url("/${user.profile.banner}")`,
                   backgroundColor: 'whitesmoke',
                   height: "150px",
                   backgroundRepeat: "repeat-y",

@@ -82,7 +82,7 @@ export default function CreatePostModal() {
             <Stack flexDirection="row" sx={{ marginBottom: "30px", borderBottom: "1px solid gray" }}>
               <Avatar
               sx={{ width: "50px", height: "50px" }}
-                src={`http://localhost:3000/uploads/${user.profile.avatar}`}
+                src={`/${user.profile.avatar}`}
               />
               <TextField
                 value={post}

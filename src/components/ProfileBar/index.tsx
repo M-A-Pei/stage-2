@@ -56,7 +56,7 @@ export default function ProfileBar({ username, pfp, banner, bio, id }: IProfile)
     >
       <Box
         sx={{
-          backgroundImage: `url("http://localhost:3000/uploads/${banner}")`,
+          backgroundImage: `url("/${banner}")`,
           backgroundColor: "white",
           height: "35%",
           backgroundRepeat: "repeat-y",
@@ -74,7 +74,7 @@ export default function ProfileBar({ username, pfp, banner, bio, id }: IProfile)
               left: "5%",
               top: "-50px",
             }}
-            src={`http://localhost:3000/uploads/${pfp}`}
+            src={`/${pfp}`}
             alt=""
           />
         </Link>

@@ -21,7 +21,7 @@ export default function Media() {
         {userImages.map((item: any) => (
           <ImageListItem key={item}>
             <img
-              src={`http://localhost:3000/uploads/${item}`}
+              src={`/${item}`}
               loading="lazy"
             />
           </ImageListItem>
