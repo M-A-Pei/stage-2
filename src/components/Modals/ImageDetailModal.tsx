@@ -1,4 +1,4 @@
-import { Box, Modal, Stack } from "@mui/material";
+import { Avatar, Box, Modal, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { api } from "../../api";
@@ -25,17 +25,6 @@ const style = {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [replies, setReplies] = useState([]);
-
-    async function getReplies() {
-      try {
-        const response = await api.get(`/reply/${postId}`);
-        setReplies(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
     async function getPost() {
       try {
         const response = await api.get(`/posts/${postId}`);
@@ -48,12 +37,11 @@ const style = {
 
     useEffect(() => {
       getPost();
-      getReplies();
     }, [])
 
   return (
     <>
-        <img onClick={handleOpen} height={"120px"} src={`http://localhost:3000/uploads/${image}`} alt="" />
+        <Avatar onClick={handleOpen} sx={{width: "120px", height: "120px"}} src={`http://localhost:3000/uploads/${image}`} alt="" />
 
         <div>
         <Modal
