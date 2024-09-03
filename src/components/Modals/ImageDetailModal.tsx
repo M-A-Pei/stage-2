@@ -1,4 +1,4 @@
-import { Avatar, Box, Modal, Stack } from "@mui/material";
+import { Box, Modal, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { api } from "../../api";
@@ -41,7 +41,7 @@ const style = {
 
   return (
     <>
-        <Avatar onClick={handleOpen} sx={{width: "120px", height: "120px"}} src={`/${image}`} alt="" />
+        <img onClick={handleOpen} style={{height: "120px"}} src={`${image}`} alt="" />
 
         <div>
         <Modal
