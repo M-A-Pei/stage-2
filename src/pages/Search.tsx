@@ -2,7 +2,6 @@ import { TextField, Stack } from "@mui/material";
 import MiniProfile from "../components/MiniProfile";
 import { api } from "../api";
 import { useEffect, useState } from "react";
-import DEFAULTPFP from "../assets/defaults/defaultpfp.jpg";
 
 export default function Search() {
   const [users, setUsers] = useState<any>([]);
@@ -56,7 +55,7 @@ export default function Search() {
           id={e.id}
           key={e.id}
           username={e.username}
-          pfp={e.profilePic || DEFAULTPFP}
+          pfp={e.profilePic}
         />
       ))}
     </Stack>

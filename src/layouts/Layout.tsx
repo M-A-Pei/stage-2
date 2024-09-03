@@ -38,9 +38,21 @@ function Layout() {
   const location = useLocation().pathname;
   const [LoadProfileBar, setLoadProfileBar] = useState(true);
   const { userID } = useParams();
+  const [users, setUsers] = useState<any>([]);
+
+  async function getUsers() {
+    try {
+      const x = await api.get("/users");
+      const data = [...x.data];
+      setUsers(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     checkLoadProfileBar(user, userID, setLoadProfileBar);
+    getUsers()
   }, [location]);
 
   if (!isLogin) {
@@ -98,26 +110,14 @@ function Layout() {
               Suggested for you
             </Typography>
             <Stack gap={2} direction="column">
-              <MiniProfile
-                id={100}
-                username="Kugisaki Nobara"
-                pfp="https://i.pinimg.com/736x/71/8d/87/718d875f00e3870c0307601c77d24358.jpg"
-              />
-              <MiniProfile
-                id={100}
-                username="Fushiguro Megumi"
-                pfp="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbs1i7Lo8m40B3osWs98w9ZrxrUpF7S4WXbA&s"
-              />
-              <MiniProfile
-                id={100}
-                username="Todo Aoi"
-                pfp="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8Jg0TjcTP1MGTbgrfljt7UdjfZeryB_YWiQ&s"
-              />
-              <MiniProfile
-                id={100}
-                username="Gojo Satoru"
-                pfp="https://i.pinimg.com/736x/a6/67/73/a667732975f0f1da1a0fd4625e30d776.jpg"
-              />
+            {users.map((e: any) => (
+                <MiniProfile
+                  id={e.id}
+                  key={e.id}
+                  username={e.username}
+                  pfp={e.profilePic}
+                />
+              ))}
             </Stack>
           </Box>
 

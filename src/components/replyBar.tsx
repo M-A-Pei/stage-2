@@ -1,4 +1,4 @@
-import { Button, Stack, TextField } from "@mui/material";
+import { Avatar, Button, Stack, TextField } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { useEffect, useState } from "react";
 import { api, setAuthToken } from "../api";
@@ -57,11 +57,9 @@ export default function ReplyBar({id}: any) {
         justifyContent="center"
         sx={{borderTop: "1px solid gray", pt: 1}}
       >
-        <img
-          height="40px"
-          width="40px"
-          style={{ borderRadius: "50%", margin: "5px" }}
-          src={`/${user.profile.avatar}`}
+        <Avatar
+          sx={{ width: "40px", height: "40px" }}
+          src={`${user.profile.avatar}`}
           alt=""
         />
         <TextField
