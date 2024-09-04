@@ -75,7 +75,7 @@ function Home() {
         >
           <Avatar
             sx={{ height: "60px", width: "60px" }}
-            src={`/${user.profile.avatar}`} 
+            src={`${user.profile.avatar}`} 
             alt=""
           />
           <TextField

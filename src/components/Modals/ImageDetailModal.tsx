@@ -41,7 +41,7 @@ const style = {
 
   return (
     <>
-        <img onClick={handleOpen} style={{height: "120px"}} src={`${image}`} alt="" />
+        <img onClick={handleOpen} style={{height: "220px"}} src={`${image}`} alt="" />
 
         <div>
         <Modal
