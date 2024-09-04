@@ -17,7 +17,7 @@ export default function MiniProfile({ pfp, username, id }: IMiniProfile) {
           width: "50px",
           height: "50px",
         }}
-        src={`/${pfp}`}
+        src={`${pfp}`}
       />
       <Link
         to={`/profile/${id}/allpost`}

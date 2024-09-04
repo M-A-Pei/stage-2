@@ -14,7 +14,6 @@ import Media from "../pages/Profile/Media";
 import Follow from "../pages/Follow";
 import Followers from "../pages/Follow/Followers";
 import Following from "../pages/Follow/Following";
-import EditAvatar from "../pages/EditAvatar";
 
 let route: RouteObject[] = [
   {
@@ -36,10 +35,6 @@ let route: RouteObject[] = [
       {
         path: "reply/:id",
         element: <Reply />,
-      },
-      {
-        path: "editAvatar",
-        element: <EditAvatar />,
       },
       {
         path: "follow",

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { api, setAuthToken } from "../api";
 import useStore from "../state/hooks";
 import Post from "./Post";
+import { toast } from "react-toastify";
 
 const inputStyle = {
     borderRadius: "10px",
@@ -43,6 +44,7 @@ export default function ReplyBar({id}: any) {
           await api.post(`/reply/${id}`, { body: reply });
           await getReplies();
           setReply("");
+          toast.success("successfully replied to comment!")
         } catch (error) {
           console.log(error);
         }

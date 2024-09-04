@@ -1,5 +1,4 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
 import useStore from "../../state/hooks";
 import { api, setAuthToken } from "../../api";
 import { useEffect, useState } from "react";
@@ -56,7 +55,7 @@ export default function ProfileBar({ username, pfp, banner, bio, id }: IProfile)
     >
       <Box
         sx={{
-          backgroundImage: `url("/${banner}")`,
+          backgroundImage: `url("${banner}")`,
           backgroundColor: "white",
           height: "35%",
           backgroundRepeat: "repeat-y",
@@ -65,7 +64,6 @@ export default function ProfileBar({ username, pfp, banner, bio, id }: IProfile)
         }}
       ></Box>
       <Box display="flex" sx={{ height: "20%" }}>
-        <Link to={user.username === username ? `/editAvatar` : ""}>
           <Avatar
             sx={{
               height: "90px",
@@ -74,10 +72,9 @@ export default function ProfileBar({ username, pfp, banner, bio, id }: IProfile)
               left: "5%",
               top: "-50px",
             }}
-            src={`/${pfp}`}
+            src={`${pfp}`}
             alt=""
           />
-        </Link>
         {user.username === username ? (
             <EditUserModal/>
         ) : (
