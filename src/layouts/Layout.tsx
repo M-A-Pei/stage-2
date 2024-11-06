@@ -42,7 +42,7 @@ function Layout() {
 
   async function getUsers() {
     try {
-      const x = await api.get("/users");
+      const x = await api.get("/follow/following");
       const data = [...x.data];
       setUsers(data);
     } catch (error) {
@@ -110,7 +110,7 @@ function Layout() {
               Suggested for you
             </Typography>
             <Stack gap={2} direction="column">
-            {users.map((e: any) => (
+              {users.map((e: any) => (
                 <MiniProfile
                   id={e.id}
                   key={e.id}

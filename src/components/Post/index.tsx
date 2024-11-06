@@ -54,20 +54,20 @@ export default function Post({ name, text, i, pfp, img }: IPost) {
         src={`${pfp}`}
       />
       <Stack direction="column" gap={1}>
-        <Stack direction="row" gap={1}>
+        <Stack direction="row" gap={1} flex={3}>
           <h3>{name}</h3>
           <small style={{ color: "gray" }}>@{name}</small>
           <small>&#x2022; 4h ago</small>
         </Stack>
 
         <Stack direction="row" gap={1} flexWrap={"wrap"}>
-          {img.map((element:any, index: number) => (
-            <ImageDetailModal image={element.image} postId={i} key={index}/>
+          {img.map((element: any, index: number) => (
+            <ImageDetailModal image={element.image} postId={i} key={index} />
           ))}
         </Stack>
 
-       
-        <p>{text}</p>
+
+        <p style={{ textAlign: "left" }}>{text}</p>
         <Stack direction="row" gap={4}>
           <Stack direction="row" gap={1}>
             <button
