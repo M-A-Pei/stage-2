@@ -16,11 +16,12 @@ export default function Sidebar() {
   return (
     <Grid
       item
-      xs={2}
+      lg={4}
       sx={{
         height: "100vh",
         bgcolor: "secondary.dark",
         borderRight: "1px solid white",
+        display: { xs: "none", sm: "block" },
       }}
     >
       <Stack direction="column" spacing={2} sx={{ height: "100vh", p: 2 }}>

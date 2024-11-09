@@ -1,4 +1,4 @@
-import { Typography, Stack, TextField, Button, FormControl, FormHelperText } from "@mui/material"
+import { Typography, Stack, TextField, Button, FormControl, FormHelperText, Box } from "@mui/material"
 import DumbwaysImg from "../assets/Dumbways.png"
 import {Link} from "react-router-dom"
 import { Controller } from "react-hook-form"
@@ -17,7 +17,16 @@ function Login() {
   }
 
   return (
-    <div style={{width: "40%"}}>
+    <Box sx={{
+      width: {
+        xs: '100%',   // 100% width on extra-small screens
+        sm: '80%',    // 80% width on small screens
+        md: '60%',    // 60% width on medium screens
+        lg: '40%',    // 40% width on large screens
+      }
+      }}
+      p={2}
+    >
       <img src={DumbwaysImg} width="120px" height="120px" alt="" />
       <Typography variant="h4"> Login to dumbways</Typography>
       
@@ -56,7 +65,7 @@ function Login() {
           <Button variant="contained" type="submit" sx={{bgcolor: "orange", borderRadius: "20px", width:"50%"}}>Login</Button>
         </Stack>
       </form>
-    </div>
+    </Box>
   )
 }
 

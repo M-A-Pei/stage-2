@@ -65,13 +65,15 @@ function Layout() {
 
       <Grid
         item
-        xs={6}
+        xs={12}
+        lg={6}
         sx={{
           height: "100vh",
           bgcolor: "secondary.dark",
           color: "white",
           p: 2,
           overflowY: "scroll",
+          flex: { xs: "none", sm: "1" },
         }}
       >
         <Outlet />
@@ -79,11 +81,12 @@ function Layout() {
 
       <Grid
         item
-        xs={4}
+        lg={3}
         sx={{
           height: "100vh",
           bgcolor: "secondary.dark",
           borderLeft: "1px solid white",
+          display: { xs: "none", sm: "block" },
         }}
       >
         <Stack direction="column" spacing={2} sx={{ height: "100vh", p: 2 }}>

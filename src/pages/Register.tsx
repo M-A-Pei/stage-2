@@ -1,4 +1,4 @@
-import { Button, Stack, TextField, Typography, FormControl, FormHelperText } from "@mui/material"
+import { Button, Stack, TextField, Typography, FormControl, FormHelperText, Box } from "@mui/material"
 import {Link} from "react-router-dom"
 import DumbwaysImg from "../assets/Dumbways.png"
 import useRegisterValidation from "../hook/useRegisterValidation"
@@ -28,7 +28,15 @@ export default function Register() {
  };
 
   return (
-    <div style={{width: "40%"}}>
+    <Box sx={{
+      width: {
+        xs: '100%',   // 100% width on extra-small screens
+        sm: '80%',    // 80% width on small screens
+        md: '60%',    // 60% width on medium screens
+        lg: '40%',    // 40% width on large screens
+      }
+      }}
+      p={2}>
     <img src={DumbwaysImg} width="120px" height="120px" alt="" />
     <Typography variant="h4">Make An Account</Typography>
     
@@ -101,6 +109,6 @@ export default function Register() {
 
       </Stack>
     </form>
-  </div>
+  </Box>
   )
 }
