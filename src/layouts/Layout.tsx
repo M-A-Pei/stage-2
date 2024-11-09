@@ -1,5 +1,5 @@
 import { Outlet, Navigate, useLocation, useParams } from "react-router-dom";
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -7,8 +7,9 @@ import Sidebar from "../components/Sidebar";
 import useStore from "../state/hooks";
 import MiniProfile from "../components/MiniProfile";
 import ProfileBar from "../components/ProfileBar";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "../api";
+import { useSwipeable } from 'react-swipeable';
 
 async function checkLoadProfileBar(
   FeUser: any,
@@ -39,6 +40,29 @@ function Layout() {
   const [LoadProfileBar, setLoadProfileBar] = useState(true);
   const { userID } = useParams();
   const [users, setUsers] = useState<any>([]);
+  const [visibleSidebar, setVisibleSidebar] = useState(false)
+  const [visibleProfilebar, setVisibleProfilebar] = useState(false)
+  const [swipeCount, setSwipeCount] = useState(0)
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const handleSwipe = useSwipeable({
+    onSwipedLeft: () => swipeCount > -1 ? setSwipeCount(swipeCount - 1) : "",
+    onSwipedRight: () => swipeCount < 1 ? setSwipeCount(swipeCount + 1) : "",
+    trackMouse: true,
+  })
+
+  function swipeLogic(){
+    if(swipeCount == -1){
+      setVisibleProfilebar(true)
+    }else if(swipeCount == 1){
+      setVisibleSidebar(true)
+    }else{
+      setVisibleProfilebar(false)
+      setVisibleSidebar(false)
+    }
+  }
 
   async function getUsers() {
     try {
@@ -55,28 +79,32 @@ function Layout() {
     getUsers()
   }, [location]);
 
+  useMemo(()=>{
+    swipeLogic()
+  }, [swipeCount])
+
   if (!isLogin) {
     return <Navigate to="/auth/login" />;
   }
 
   return (
-    <Grid container>
-      <Sidebar />
+    <Grid container  {...(isSmallScreen ? handleSwipe : {})}>
+      <Sidebar visible={visibleSidebar}/>
 
       <Grid
         item
         xs={12}
-        lg={6}
+        lg={7}
         sx={{
           height: "100vh",
           bgcolor: "secondary.dark",
           color: "white",
           p: 2,
           overflowY: "scroll",
-          flex: { xs: "none", sm: "1" },
+          flex: { sm: "1" },
         }}
       >
-        <Outlet />
+        <Outlet/>
       </Grid>
 
       <Grid
@@ -86,7 +114,17 @@ function Layout() {
           height: "100vh",
           bgcolor: "secondary.dark",
           borderLeft: "1px solid white",
-          display: { xs: "none", sm: "block" },
+          display: {
+            xs: visibleProfilebar ? 'block' : 'none',
+            lg: "block",
+          },
+          position: {
+            xs: "fixed",
+            lg: "static"
+          },
+          right: 0,
+          top: 0,  // Ensure it's at the top of the viewport
+          zIndex: 10
         }}
       >
         <Stack direction="column" spacing={2} sx={{ height: "100vh", p: 2 }}>

@@ -11,17 +11,27 @@ function handleLogout(clearUser: Function) {
   clearUser();
   toast.success("successfully logged out!");
 }
-export default function Sidebar() {
+export default function Sidebar({visible}: {visible: boolean}) {
   const { clearUser } = useStore();
   return (
     <Grid
       item
-      lg={4}
+      lg={2}
       sx={{
         height: "100vh",
         bgcolor: "secondary.dark",
         borderRight: "1px solid white",
-        display: { xs: "none", sm: "block" },
+        display: {
+          xs: visible ? 'block' : 'none',
+          lg: "block",
+        },
+        position: {
+          xs: "fixed",
+          lg: "static"
+        },
+        left: 0,
+        top: 0,  // Ensure it's at the top of the viewport
+        zIndex: 10  // To make sure it stays above the Outlet
       }}
     >
       <Stack direction="column" spacing={2} sx={{ height: "100vh", p: 2 }}>

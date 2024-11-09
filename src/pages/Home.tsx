@@ -65,7 +65,6 @@ function Home() {
 
   return (
       <Stack spacing={3} direction="column">
-        <h1>Home Page</h1>
         <Stack
           borderBottom={"1px solid gray"}
           direction="row"
